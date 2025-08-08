@@ -461,7 +461,6 @@ docker-compose up --build
 **Gabriel Santos**
 - 🐙 **GitHub:** [gbsilvasantos/worship-schedule](https://github.com/gbsilvasantos/worship-schedule)
 - 🌐 **Demo Live:** [hml.portadagraca.com.br](https://hml.portadagraca.com.br)
-- 📊 **Swagger API:** [hml.portadagraca.com.br/api-docs](https://hml.portadagraca.com.br/api-docs)
 - 💼 **LinkedIn:** Compartilhe este projeto!
 
 ---
