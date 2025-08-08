@@ -284,7 +284,7 @@ Disponíveis:
 
 ### **🎯 Swagger Documentation - Documentação Interativa Completa**
 
-**🔗 Acesse:** `http://localhost:4000/api-docs` (desenvolvimento) ou `https://hml.portadagraca.com.br/api-docs` (produção)
+**🔗 Acesse:** `http://localhost:4000/api/swagger` (desenvolvimento)
 
 **✨ Features do Swagger:**
 - 📋 **Documentação completa** de todos os endpoints
