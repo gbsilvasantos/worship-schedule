@@ -471,8 +471,6 @@ docker-compose up --build
 
 *Demonstrando como transformar uma aplicação local em um serviço público usando tecnologias modernas*
 
-**🎵 Feito com ❤️ para a comunidade de desenvolvedores**
-
 [![⭐ Star no GitHub](https://img.shields.io/github/stars/gbsilvasantos/worship-schedule?style=social)](https://github.com/gbsilvasantos/worship-schedule)
 
 </div>
