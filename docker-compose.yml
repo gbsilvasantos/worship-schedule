@@ -1,0 +1,78 @@
+services:
+  frontend:
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        REACT_APP_API_URL: "/api"
+    container_name: worship-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    environment:
+      - NODE_ENV=production
+      - TZ=America/Sao_Paulo
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: worship-backend
+    ports:
+      - "4000:4000"
+    depends_on:
+      - database
+    environment:
+      - DATABASE_URL=postgresql://worship_user:worship_pass@database:5432/worship_db
+      - NODE_ENV=production
+      - PORT=4000
+      - DATABASE_REQUIRE_SSL=false
+      - CORS_ORIGINS=http://localhost,http://localhost:3000,http://localhost:4000,http://192.168.64.8,http://192.168.64.8:4000,https://mdl.portadagraca.com.br
+      - API_BASE_URL=http://localhost:4000/api
+      - TZ=America/Sao_Paulo
+    restart: unless-stopped
+
+  database:
+    image: postgres:17-alpine 
+    container_name: worship-database
+    environment:
+      - POSTGRES_DB=worship_db
+      - POSTGRES_USER=worship_user
+      - POSTGRES_PASSWORD=worship_pass
+      - TZ=America/Sao_Paulo
+      - PGTZ=America/Sao_Paulo
+      - POSTGRES_INITDB_ARGS=--encoding=UTF-8 --lc-collate=pt_BR.UTF-8 --lc-ctype=pt_BR.UTF-8
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init:/docker-entrypoint-initdb.d
+    restart: unless-stopped
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: worship-pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@worship.com
+      - PGADMIN_DEFAULT_PASSWORD=admin123
+      - PGADMIN_CONFIG_SERVER_MODE=False
+      - PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED=False
+      - PGADMIN_LISTEN_PORT=80
+      - TZ=America/Sao_Paulo
+    ports:
+      - "8080:80"
+    depends_on:
+      - database
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  pgadmin_data:
+
+networks:
+  default:
+    name: worship-network
